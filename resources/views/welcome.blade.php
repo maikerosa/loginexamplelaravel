@@ -33,7 +33,7 @@
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" placeholder="Seu Email">
 
-                    <label for="password">Password</label>
+                    <label for="password">Senha</label>
                     <input type="password" name="password" id="password" placeholder="Sua Senha">
 
                     <input type="submit" value="Entrar">

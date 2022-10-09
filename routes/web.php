@@ -20,3 +20,7 @@ Route::get('/cadastro', [App\Http\Controllers\UserController::class, 'signup'])-
 Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
 
 Route::post('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
+
+Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
+
+Route::get('/dash', [App\Http\Controllers\Controller::class, 'renderDash'])->name('dashboard');

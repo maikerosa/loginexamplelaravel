@@ -11,18 +11,32 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function index(){
-        return view('welcome');
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        } else {
+            return view('welcome');
+
+        }
     }
 
     public function signup() {
-        return view('users/cadastro');
+
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        } else {
+            return view('users/cadastro');
+
+
+        }
     }
 
     public function login(Request $request) {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->back()->with('success', 'Logado com sucesso!');
+        if ($request == null || $request->email == null || $request->password == null) {
+            return redirect()->back()->with('error', 'Preencha todos os campos!');
+        } else if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard')->with('success', 'Login realizado com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Falha ao logar!');
         }
@@ -57,5 +71,10 @@ class UserController extends Controller
 
 
 
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('home.login');
     }
 }
